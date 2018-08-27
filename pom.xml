@@ -7,6 +7,7 @@
     <groupId>ru.mos</groupId>
     <artifactId>fake</artifactId>
     <version>${newVersion}</version>
+    <packaging>war</packaging>
 
     <properties>
         <newVersion>1.0</newVersion>
@@ -25,5 +26,26 @@
             </properties>
         </profile>
     </profiles>
+
+    <build>
+    <finalName>ssm</finalName>
+    <plugins>
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.2</version>
+        <configuration>
+            <failOnMissingWebXml>false</failOnMissingWebXml>
+            <outputDirectory>${project.basedir}/builds/${newVersion}</outputDirectory>
+            <warSourceDirectory>target/client</warSourceDirectory>
+            <archive>
+                <manifest>
+                    <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                </manifest>
+            </archive>
+        </configuration>
+    </plugin>
+    </plugins>
+    </build>
 
 </project>
