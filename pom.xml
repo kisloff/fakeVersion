@@ -58,7 +58,7 @@
                     </goals>
                     <configuration>
                         <source>
-                            System.setProperty("releaseVer", "${env.GIT_BRANCH}".replace('release/', ''))
+                            System.setProperty("releaseVer", "${env.GIT_BRANCH}")
                         </source>
                     </configuration>
                 </execution>
