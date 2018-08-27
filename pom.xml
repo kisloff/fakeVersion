@@ -22,7 +22,7 @@
                 <!--Проставить при создании новой release-ветки.
                 Необходимо рассмотреть возможность автоматизации данного процесса в части забора переменной
                 из имени ветки. Вероятно, решится добавлением maven-release-plugin-->
-                <newVersion>1.3.${env.BUILD_NUMBER}</newVersion>
+                <newVersion>${git.branch}.${env.BUILD_NUMBER}</newVersion>
             </properties>
         </profile>
     </profiles>
