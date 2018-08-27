@@ -22,7 +22,7 @@
                 <!--Проставить при создании новой release-ветки.
                 Необходимо рассмотреть возможность автоматизации данного процесса в части забора переменной
                 из имени ветки. Вероятно, решится добавлением maven-release-plugin-->
-                <newVersion>{${env.GIT_BRANCH#*/}}.${env.BUILD_NUMBER}</newVersion>
+                <newVersion>${releaseVer}.${env.BUILD_NUMBER}</newVersion>
             </properties>
         </profile>
     </profiles>
@@ -45,6 +45,25 @@
             </archive>
         </configuration>
     </plugin>
+        <!-- modify content of a maven property and save it into a new property
+         via Groovy Maven Plugin ... -->
+        <plugin>
+            <groupId>org.codehaus.groovy.maven</groupId>
+            <artifactId>gmaven-plugin</artifactId>
+            <executions>
+                <execution>
+                    <phase>generate-sources</phase>
+                    <goals>
+                        <goal>execute</goal>
+                    </goals>
+                    <configuration>
+                        <source>
+                            System.setProperty("releaseVer", "${env.GIT_BRANCH}".replace('release/', ''))
+                        </source>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
     </plugins>
     </build>
 
